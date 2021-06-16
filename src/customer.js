@@ -128,6 +128,7 @@ function initCreate(app, openApi) {
     const route = "/customer";
     // declare route to express
     app.post(route, create);
+    openApi.declareSecurityScheme("bearerSecurity", ts_openapi_1.bearerAuth());
     // declare openAPI schema
     openApi.addPath(route, {
         post: {
@@ -148,6 +149,7 @@ function initCreate(app, openApi) {
                 }),
             },
             tags: ["Customer Operations"],
+            security: [{ bearerSecurity: [] }],
             responses: {
                 201: ts_openapi_1.bodySchema(ts_openapi_1.Types.Object({
                     description: "Created",

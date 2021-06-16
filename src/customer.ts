@@ -1,5 +1,5 @@
 import { Application, Request, Response } from "express";
-import { OpenApi, Types, bodySchema } from "ts-openapi";
+import { OpenApi, Types, bodySchema, bearerAuth } from "ts-openapi";
 import { CustomerType, errorSchema, responseSchema, commonProperties } from "./common";
 
 // this handles requests
@@ -147,6 +147,7 @@ function initCreate(app: Application, openApi: OpenApi) {
   // declare route to express
   app.post(route, create);
 
+  openApi.declareSecurityScheme("bearerSecurity", bearerAuth());
   // declare openAPI schema
   openApi.addPath(
     route,
@@ -169,6 +170,7 @@ function initCreate(app: Application, openApi: OpenApi) {
           }),
         },
         tags: ["Customer Operations"],
+        security: [{ bearerSecurity: [] }],
         responses: {
           201: bodySchema(
             Types.Object({
