@@ -23,5 +23,5 @@ http://localhost:8000/api-docs
 or as plain json via
 
 ```html
-http://localhost:8000/openapi.json
+http://localhost:8000/api-docs/openapi.json
 ```
